@@ -2,11 +2,11 @@ name: "Build"
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - master
+    # branches:
+      # - master
   push:
-    branches:
-      - master
+    # branches:
+      # - master
 jobs:
   nix-build:
    runs-on: ubuntu-latest
