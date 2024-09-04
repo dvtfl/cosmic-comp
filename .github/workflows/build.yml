@@ -14,34 +14,43 @@ jobs:
      contents: read
      id-token: write
    steps:
+
    - uses: actions/checkout@v4
    - uses: DeterminateSystems/nix-installer-action@main
    - uses: DeterminateSystems/magic-nix-cache-action@main
+
    - run: nix flake check --print-build-logs --keep-going
+
   check-no-default-features:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
     - uses: Swatinem/rust-cache@v2
+
     - run: sudo apt-get update; sudo apt-get install -y libdrm-dev libudev-dev libgbm-dev libxkbcommon-dev libegl1-mesa-dev libwayland-dev libinput-dev libdbus-1-dev libsystemd-dev libseat-dev
 
     - run: cargo check --no-default-features
+
   check-debug-feature:
     runs-on: ubuntu-latest
     steps:
      - uses: actions/checkout@v4
      - uses: dtolnay/rust-toolchain@stable
      - uses: Swatinem/rust-cache@v2
+
      - run: sudo apt-get update; sudo apt-get install -y libdrm-dev libudev-dev libgbm-dev libxkbcommon-dev libegl1-mesa-dev libwayland-dev libinput-dev libdbus-1-dev libsystemd-dev libseat-dev
 
      - run: cargo check --features debug
+
   check-profile-with-tracy-feature:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+
       - run: sudo apt-get update; sudo apt-get install -y libdrm-dev libudev-dev libgbm-dev libxkbcommon-dev libegl1-mesa-dev libwayland-dev libinput-dev libdbus-1-dev libsystemd-dev libseat-dev
+
       - run: cargo check --features profile-with-tracy
 
